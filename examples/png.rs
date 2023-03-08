@@ -7,10 +7,10 @@ use immo::png::Png;
 
 fn main() {
     let mut png = Png::new(10,10);
-    png.rectangle(0,0,5,5,(255,50,210,255)).unwrap();
-    png.rectangle(5,0,5,5,(0,0,0,255)).unwrap();
-    png.rectangle(0,5,5,5,(0,0,0,255)).unwrap();
-    png.rectangle(5,5,5,5,(255,50,210,255)).unwrap();
+    png.fill_rectangle(0, 0, 5, 5, (255, 50, 210, 255)).unwrap();
+    png.fill_rectangle(5, 0, 5, 5, (0, 0, 0, 255)).unwrap();
+    png.fill_rectangle(0, 5, 5, 5, (0, 0, 0, 255)).unwrap();
+    png.fill_rectangle(5, 5, 5, 5, (255, 50, 210, 255)).unwrap();
 
     let path = String::from("sample.png");
     let file = File::create(path).unwrap();

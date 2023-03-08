@@ -42,7 +42,7 @@ impl Png {
         self.0[index+3] = color.3;
     }
 
-    pub fn rectangle(&mut self,x:u32,y:u32,width:u32,height:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError>{
+    pub fn fill_rectangle(&mut self, x:u32, y:u32, width:u32, height:u32, color: (u8, u8, u8, u8)) -> Result<(),ImageError>{
         let mut xc = 0;
         let mut yc = 0;
 
@@ -61,6 +61,18 @@ impl Png {
                 yc += 1;
                 xc = 0;
             }
+        }
+
+        Ok(())
+    }
+
+    pub fn draw_rectangle(&mut self, x:u32, y:u32, width:u32, height:u32, thickness: u32, color: (u8, u8, u8, u8)) -> Result<(),ImageError>{
+        if width == 0 || height == 0 || thickness == 0 {
+            return Err(ImageError::new_simple(ErrorKind::InvalidValue(ImageType::Png)));
+        }
+
+        for i in 0..((self.1*self.2)*4) {
+            
         }
 
         Ok(())
