@@ -16,6 +16,17 @@ impl Png {
         }
     }
 
+    pub fn clear(&mut self,color: (u8,u8,u8,u8)) {
+        let mut data = vec![];
+        for _ in 0..self.1*self.2 {
+            data.push(color.0);
+            data.push(color.1);
+            data.push(color.2);
+            data.push(color.3);
+        }
+        self.0 = data;
+    }
+
     pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) {
         let index = if x == 0 {
             (x*4+(y*self.2)*4) as usize

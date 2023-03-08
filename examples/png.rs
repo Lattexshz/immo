@@ -7,6 +7,7 @@ use immo::png::Png;
 fn main() {
     let mut png = Png::new(10,10);
 
+    png.clear((0,0,0,255));
     // Y = 0
     png.point(4,0,(255,255,255,255));
     png.point(5,0,(255,255,255,255));
