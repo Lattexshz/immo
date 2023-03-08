@@ -33,11 +33,35 @@ impl Png {
         }else {
             (x*4+(y*self.2)*4) as usize
         };
-        println!("index: {} len: {}",index,self.0.len());
+
         self.0[index] = color.0;
         self.0[index+1] = color.1;
         self.0[index+2] = color.2;
         self.0[index+3] = color.3;
+    }
+
+    pub fn rectangle(&mut self,x:u32,y:u32,width:u32,height:u32,color: (u8,u8,u8,u8)) -> Result<(),()>{
+        let mut xc = 0;
+        let mut yc = 0;
+
+        if width == 0 || height == 0 {
+            return Err(());
+        }
+
+        for i in 0..((self.1*self.2)*4) {
+            if xc >= x && xc <= (width+x)-1 {
+                if yc >= y && yc <= (height+y)-1 {
+                    self.point(xc,yc,color);
+                }
+            }
+            xc += 1;
+            if xc == self.1*4 {
+                yc += 1;
+                xc = 0;
+            }
+        }
+
+        Ok(())
     }
 
     pub fn as_slice(&self) -> &[u8] {
