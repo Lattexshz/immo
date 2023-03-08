@@ -50,10 +50,13 @@ impl Png {
             return Err(ImageError::new_simple(ErrorKind::InvalidValue(ImageType::Png)));
         }
 
+        let mut vec = vec![];
+        vec.push((xc,yc,color));
+
         for i in 0..((self.1*self.2)*4) {
             if xc >= x && xc <= (width+x)-1 {
                 if yc >= y && yc <= (height+y)-1 {
-                    self.point(xc,yc,color);
+                    vec.push((xc,yc,color));
                 }
             }
             xc += 1;
@@ -61,6 +64,10 @@ impl Png {
                 yc += 1;
                 xc = 0;
             }
+        }
+
+        for i in vec {
+            self.point(i.0,i.1,i.2);
         }
 
         Ok(())
@@ -72,7 +79,7 @@ impl Png {
         }
 
         for i in 0..((self.1*self.2)*4) {
-            
+
         }
 
         Ok(())
