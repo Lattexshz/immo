@@ -1,4 +1,6 @@
-pub struct Png(Vec<u8>,u32,u32);
+use crate::error::{ErrorKind, ImageError, ImageType};
+
+pub struct Png(Vec<u8>, u32, u32);
 
 impl Png {
     pub fn new(width:u32,height:u32) -> Self {
@@ -40,12 +42,12 @@ impl Png {
         self.0[index+3] = color.3;
     }
 
-    pub fn rectangle(&mut self,x:u32,y:u32,width:u32,height:u32,color: (u8,u8,u8,u8)) -> Result<(),()>{
+    pub fn rectangle(&mut self,x:u32,y:u32,width:u32,height:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError>{
         let mut xc = 0;
         let mut yc = 0;
 
         if width == 0 || height == 0 {
-            return Err(());
+            return Err(ImageError::new_simple(ErrorKind::InvalidValue(ImageType::Png)));
         }
 
         for i in 0..((self.1*self.2)*4) {
