@@ -1,0 +1,26 @@
+{
+  "name": "wasm-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "webpack-dev-server --openssl-legacy-provider"
+  },
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "immo": "^0.1.0"
+  },
+  "devDependencies": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lattexshz/immo.git"
+  },
+  "author": "Lattexshz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lattexshz/immo/issues"
+  },
+  "homepage": "https://github.com/Lattexshz/immo#readme"
+}
