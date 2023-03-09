@@ -94,9 +94,17 @@ impl Png {
             return Err(ImageError::new_simple(ErrorKind::InvalidValue(ImageType::Png)));
         }
 
-        for i in 0..((self.1*self.2)*4) {
-
+        if thickness >= width {
+            return Err(ImageError::new_simple(ErrorKind::InvalidValue(ImageType::Png)));
         }
+
+        self.fill_rectangle(x,y,width,thickness,color)?;
+
+        self.fill_rectangle(x,y,thickness,height,color)?;
+
+        self.fill_rectangle(x+width-thickness,y,thickness,height,color)?;
+
+        self.fill_rectangle(x,y+height-thickness,width,thickness,color)?;
 
         Ok(())
     }
