@@ -2,6 +2,7 @@ use png::text_metadata::{ITXtChunk, ZTXtChunk};
 use std::env;
 use std::fs::File;
 use std::io::BufWriter;
+use std::time::Instant;
 use immo::error::ImageError;
 use immo::png::Png;
 
@@ -11,7 +12,8 @@ const LIGHT_AQUA: (u8, u8, u8, u8) = (170,222,240,255);
 const DARK_AQUA: (u8, u8, u8, u8) = (0,140,180,255);
 const AQUA: (u8, u8, u8, u8) = (0,222,255,255);
 
-fn main() {
+fn main() -> Result<(),ImageError>{
+    let start = Instant::now();
     let mut png = Png::new(16,16);
 
     png.point(4,3,BLACK);
@@ -122,4 +124,9 @@ fn main() {
 
 
     writer.write_image_data(png.as_slice()).unwrap();
+
+    let end = start.elapsed();
+    println!("{}.{:03} second elapsed.", end.as_secs(), end.subsec_nanos() / 1_000_000);
+
+    Ok(())
 }

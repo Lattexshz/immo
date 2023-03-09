@@ -31,11 +31,11 @@ impl Png {
 
     pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError> {
 
-        if x >= self.1-1 {
+        if x >= self.1 {
             return Err(ImageError::new_simple(ErrorKind::OutOfRange(self.1-1,x)));
         }
 
-        if y >= self.2-1 {
+        if y >= self.2 {
             return Err(ImageError::new_simple(ErrorKind::OutOfRange(self.2-1,y)));
         }
 
