@@ -78,7 +78,12 @@ impl Png {
         }
 
         for i in vec {
-            self.point(i.0,i.1,i.2).unwrap();
+            match self.point(i.0,i.1,i.2) {
+                Ok(_) => {}
+                Err(err) => {
+                    error!("{}",err);
+                }
+            }
         }
 
         Ok(())
