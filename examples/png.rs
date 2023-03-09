@@ -145,7 +145,7 @@ fn main() -> Result<(),ImageError>{
     png.point(8,14,BLACK)?;
 
 
-    let path = String::from("sample.png");
+    let path = String::from("png.png");
     let file = File::create(path).unwrap();
     let w = &mut BufWriter::new(file);
 
