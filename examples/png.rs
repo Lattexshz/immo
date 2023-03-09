@@ -63,6 +63,51 @@ fn main() {
     png.point(14,6,BLACK);
 
     png.point(0,7,BLACK);
+    png.point(1,7,DARK_AQUA);
+    png.point(2,7,DARK_AQUA);
+    png.point(3,7,DARK_AQUA);
+    png.point(4,7,DARK_AQUA);
+    png.point(5,7,AQUA);
+    png.point(6,7,AQUA);
+    png.point(7,7,AQUA);
+    png.point(8,7,AQUA);
+    png.point(9,7,DARK_AQUA);
+    png.point(10,7,DARK_AQUA);
+    png.point(11,7,DARK_AQUA);
+    png.point(12,7,DARK_AQUA);
+    png.point(13,7,DARK_AQUA);
+    png.point(14,7,DARK_AQUA);
+    png.point(15,7,BLACK);
+
+    png.point(1,8,BLACK);
+    png.point(2,8,AQUA);
+    png.point(3,8,LIGHT_AQUA);
+    png.point(4,8,LIGHT_AQUA);
+    png.point(5,8,AQUA);
+    png.point(6,8,LIGHT_AQUA);
+    png.point(7,8,LIGHT_AQUA);
+    png.point(8,8,WHITE);
+    png.point(9,8,AQUA);
+    png.point(10,8,WHITE);
+    png.point(11,8,DARK_AQUA);
+    png.point(12,8,LIGHT_AQUA);
+    png.point(13,8,DARK_AQUA);
+    png.point(14,8,BLACK);
+
+    png.point(2,9,BLACK);
+    png.point(3,9,LIGHT_AQUA);
+    png.point(4,9,LIGHT_AQUA);
+    png.point(5,9,LIGHT_AQUA);
+    png.point(6,9,LIGHT_AQUA);
+    png.point(7,9,AQUA);
+    png.point(8,9,LIGHT_AQUA);
+    png.point(9,9,AQUA);
+    png.point(10,9,AQUA);
+    png.point(11,9,DARK_AQUA);
+    png.point(12,9,DARK_AQUA);
+    png.point(13,9,BLACK);
+
+    png.point(3,10,BLACK);
 
 
     let path = String::from("sample.png");

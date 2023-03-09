@@ -29,7 +29,16 @@ impl Png {
         self.0 = data;
     }
 
-    pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) {
+    pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError> {
+
+        if x >= self.1-1 {
+            return Err(ImageError::new_simple(ErrorKind::OutOfRange(self.1-1,x)));
+        }
+
+        if y >= self.2-1 {
+            return Err(ImageError::new_simple(ErrorKind::OutOfRange(self.2-1,y)));
+        }
+
         let index = if x == 0 {
             (x*4+(y*self.2)*4) as usize
         }else {
@@ -40,6 +49,8 @@ impl Png {
         self.0[index+1] = color.1;
         self.0[index+2] = color.2;
         self.0[index+3] = color.3;
+
+        Ok(())
     }
 
     pub fn fill_rectangle(&mut self, x:u32, y:u32, width:u32, height:u32, color: (u8, u8, u8, u8)) -> Result<(),ImageError>{
@@ -67,7 +78,7 @@ impl Png {
         }
 
         for i in vec {
-            self.point(i.0,i.1,i.2);
+            self.point(i.0,i.1,i.2).unwrap();
         }
 
         Ok(())

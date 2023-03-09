@@ -8,19 +8,21 @@ pub enum ImageType {
 
 impl fmt::Display for ImageType {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        f.write_fmt(format_args!("PNG"))
+        f.write_fmt(format_args!("{}",self))
     }
 }
 
 #[derive(Clone)]
 pub enum ErrorKind {
-    InvalidValue(ImageType)
+    InvalidValue(ImageType),
+    OutOfRange(u32,u32)
 }
 
 impl ErrorKind {
     pub fn description(&self) -> String {
         match self {
             ErrorKind::InvalidValue(image) => format!("Invalid value entered. ImageType: {}",image),
+            ErrorKind::OutOfRange(max,input) => format!("The maximum allowable value is {}, but {} was entered",max,input)
         }
     }
 }
