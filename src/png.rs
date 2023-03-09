@@ -29,8 +29,18 @@ impl Png {
         self.0 = data;
     }
 
-    pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError> {
+    pub fn line(&mut self,from:(u32,u32),to:(u32,u32),thickness:u32,color:(u8,u8,u8,u8)) -> Result<(),ImageError> {
 
+        if from.1 == to.1 {
+            self.fill_rectangle(from.0,from.1,from.0+to.0,thickness,color).unwrap();
+        }else if from.0 == to.0 {
+            self.fill_rectangle(from.0,from.1,thickness,from.1+to.1,color).unwrap();
+        }
+
+        Ok(())
+    }
+
+    pub fn point(&mut self,x:u32,y:u32,color: (u8,u8,u8,u8)) -> Result<(),ImageError> {
         if x >= self.1 {
             return Err(ImageError::new_simple(ErrorKind::OutOfRange(self.1-1,x)));
         }
@@ -62,7 +72,6 @@ impl Png {
         }
 
         let mut vec = vec![];
-        vec.push((xc,yc,color));
 
         for i in 0..((self.1*self.2)*4) {
             if xc >= x && xc <= (width+x)-1 {
