@@ -1,5 +1,7 @@
 #[macro_use]
 extern crate log;
 
-pub mod png;
+/// Error handling
 pub mod error;
+/// Processing PNG Images
+pub mod png;

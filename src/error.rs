@@ -1,28 +1,33 @@
-use std::{error, fmt};
 use std::fmt::Formatter;
+use std::{error, fmt};
 
 #[derive(Clone)]
 pub enum ImageType {
-    Png
+    Png,
 }
 
 impl fmt::Display for ImageType {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        f.write_fmt(format_args!("{}",self))
+        f.write_fmt(format_args!("{}", self))
     }
 }
 
 #[derive(Clone)]
 pub enum ErrorKind {
     InvalidValue(ImageType),
-    OutOfRange(u32,u32)
+    OutOfRange(u32, u32),
 }
 
 impl ErrorKind {
     pub fn description(&self) -> String {
         match self {
-            ErrorKind::InvalidValue(image) => format!("Invalid value entered. ImageType: {}",image),
-            ErrorKind::OutOfRange(max,input) => format!("The maximum allowable value is {}, but {} was entered",max,input)
+            ErrorKind::InvalidValue(image) => {
+                format!("Invalid value entered. ImageType: {}", image)
+            }
+            ErrorKind::OutOfRange(max, input) => format!(
+                "The maximum allowable value is {}, but {} was entered",
+                max, input
+            ),
         }
     }
 }
@@ -33,14 +38,18 @@ pub struct ImageError {
 
 impl ImageError {
     pub(crate) fn new<E>(kind: ErrorKind, error: E) -> Self
-        where
-            E: Into<Box<dyn error::Error + Send + Sync>>
+    where
+        E: Into<Box<dyn error::Error + Send + Sync>>,
     {
-        ImageError { _error: _ImageError::Custom((kind, error.into())) }
+        ImageError {
+            _error: _ImageError::Custom((kind, error.into())),
+        }
     }
 
     pub(crate) fn new_simple(kind: ErrorKind) -> Self {
-        ImageError { _error: _ImageError::Simple(kind) }
+        ImageError {
+            _error: _ImageError::Simple(kind),
+        }
     }
 
     fn kind(&self) -> ErrorKind {
@@ -52,8 +61,8 @@ impl ImageError {
 }
 
 enum _ImageError {
-    Simple( ErrorKind ),
-    Custom( (ErrorKind, Box<dyn error::Error + Send + Sync>) ),
+    Simple(ErrorKind),
+    Custom((ErrorKind, Box<dyn error::Error + Send + Sync>)),
 }
 
 impl fmt::Display for ImageError {
@@ -72,7 +81,7 @@ impl error::Error for ImageError {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         match &self._error {
             _ImageError::Simple(_) => None,
-            _ImageError::Custom(c) => c.1.source()
+            _ImageError::Custom(c) => c.1.source(),
         }
     }
 }
