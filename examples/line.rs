@@ -15,9 +15,12 @@ const AQUA: (u8, u8, u8, u8) = (0,222,255,255);
 fn main() -> Result<(),ImageError>{
     let start = Instant::now();
     let mut png = Png::new(15,15);
-    png.draw_rectangle(0,0,15,15,1,BLACK)?;
-    png.line((7,0),(7,15),1,BLACK)?;
-    png.line((0,7),(15,7),1,BLACK)?;
+    //png.draw_rectangle(0,0,15,15,1,BLACK)?;
+    // png.line((7,0),(7,15),1,BLACK)?;
+    // png.line((0,7),(15,7),1,BLACK)?;
+    //png.point(1,1,BLACK)?;
+    png.draw_rectangle(0,1,1,5,1,BLACK)?;
+    //png.line((0,0),(1,15),1,BLACK)?;
 
     let path = String::from("line.png");
     let file = File::create(path).unwrap();

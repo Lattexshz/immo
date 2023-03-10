@@ -40,15 +40,21 @@ impl Png {
             // Right lopsided
             let shift = to.0-from.0;
             let mut shift_x_count = 0;
-            let mut shift_y_Count = 0;
+            let mut shift_y_count = 0;
 
             let height = ((from.1+to.1)/shift);
 
-            for _ in shift {
-                self.fill_rectangle(from.0+shift,from.1+shift_y_count,thickness,height,color)?;
+            for _ in 0..shift {
+                self.fill_rectangle(from.0+shift_x_count,from.1+shift_y_count,thickness,height,color)?;
                 shift_x_count += thickness;
-                shift_y_count += from.1;
+                shift_y_count += height;
             }
+
+            let actual_height = height*shift;
+            if actual_height < from.1+to.1 {
+                self.fill_rectangle(from.0+shift_x_count-1,from.1+shift_y_count,thickness,from.1+to.1-actual_height,color)?;
+            }
+
         } else if to.0 < from.0 {
             // Left lopsided
         }
@@ -90,7 +96,7 @@ impl Png {
         let mut vec = vec![];
 
         for i in 0..((self.1*self.2)*4) {
-            if xc >= x && xc <= (width+x)-1 {
+            if xc >= x && xc <= (width+x) {
                 if yc >= y && yc <= (height+y)-1 {
                     vec.push((xc,yc,color));
                 }
