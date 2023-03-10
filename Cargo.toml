@@ -2,6 +2,10 @@
 name = "immo"
 version = "0.1.0"
 edition = "2021"
+readme = "README.md"
+description = "Processing of various images (e.g., drawing of square systems)"
+authors = ["Lattexshz"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
