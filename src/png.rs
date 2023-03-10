@@ -30,11 +30,27 @@ impl Png {
     }
 
     pub fn line(&mut self,from:(u32,u32),to:(u32,u32),thickness:u32,color:(u8,u8,u8,u8)) -> Result<(),ImageError> {
-
         if from.1 == to.1 {
-            self.fill_rectangle(from.0,from.1,from.0+to.0,thickness,color).unwrap();
-        }else if from.0 == to.0 {
-            self.fill_rectangle(from.0,from.1,thickness,from.1+to.1,color).unwrap();
+            // Horizontal
+            self.fill_rectangle(from.0,from.1,from.0+to.0,thickness,color)?;
+        } else if from.0 == to.0 {
+            // Vertical
+            self.fill_rectangle(from.0,from.1,thickness,from.1+to.1,color)?;
+        } else if from.0 < to.0 {
+            // Right lopsided
+            let shift = to.0-from.0;
+            let mut shift_x_count = 0;
+            let mut shift_y_Count = 0;
+
+            let height = ((from.1+to.1)/shift);
+
+            for _ in shift {
+                self.fill_rectangle(from.0+shift,from.1+shift_y_count,thickness,height,color)?;
+                shift_x_count += thickness;
+                shift_y_count += from.1;
+            }
+        } else if to.0 < from.0 {
+            // Left lopsided
         }
 
         Ok(())
