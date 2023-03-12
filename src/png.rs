@@ -38,10 +38,10 @@ impl Png {
     ) -> Result<(), ImageError> {
         if from.1 == to.1 {
             // Horizontal
-            self.fill_rectangle(from.0, from.1, from.0 + to.0, thickness, color)?;
+            self.fill_rectangle(from.0, from.1, from.0 + to.0 + 1, thickness, color)?;
         } else if from.0 == to.0 {
             // Vertical
-            self.fill_rectangle(from.0, from.1, thickness, from.1 + to.1, color)?;
+            self.fill_rectangle(from.0, from.1, thickness, from.1 + to.1 + 1, color)?;
         } else if from.0 < to.0 {
             // Right lopsided
             let shift = to.0 - from.0;
@@ -121,8 +121,8 @@ impl Png {
 
         let mut vec = vec![];
 
-        for _i in 0..((self.1 * self.2) * 4) {
-            if xc >= x && xc <= (width + x) {
+        for _i in 0..((self.1 * self.2) * 4) - 1 {
+            if xc >= x && xc <= (width + x) - 1 {
                 if yc >= y && yc <= (height + y) - 1 {
                     vec.push((xc, yc, color));
                 }

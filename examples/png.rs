@@ -1,7 +1,6 @@
 use immo::error::ImageError;
 use immo::png::Png;
 
-
 use std::fs::File;
 use std::io::BufWriter;
 use std::time::Instant;
