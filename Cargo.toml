@@ -6,7 +6,6 @@ readme = "README.md"
 description = "Processing of various images (e.g., drawing of square systems)"
 authors = ["Lattexshz"]
 license = "MIT"
-readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
